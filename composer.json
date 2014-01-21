@@ -2,7 +2,7 @@
     "name": "pallo/web-template-smarty",
     "description": "Smarty template integration for the base web application of the Pallo framework",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "Joris Vandeweerd",
