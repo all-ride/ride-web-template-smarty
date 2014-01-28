@@ -1,6 +1,6 @@
 <?php
 
-function smarty_modifier_translate($string) {
+function smarty_modifier_translate($string, array $parameters = null) {
     static $translator;
 
     if (!$translator) {
@@ -10,5 +10,5 @@ function smarty_modifier_translate($string) {
         $translator = $i18n->getTranslator();
     }
 
-    return $translator->translate($string);
+    return $translator->translate($string, $parameters);
 }
