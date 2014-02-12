@@ -9,7 +9,7 @@ function smarty_modifier_decorate($value, array $parameters = null) {
 
     $type = array_shift($parameters);
     if (!$type || !is_string($type)) {
-        return '<span class="error">Could not decorate value: onvalid decorator type provided</span>';
+        return '<span class="error">Could not decorate value: invalid decorator type provided</span>';
     }
 
     if (isset($decorators[$type])) {
