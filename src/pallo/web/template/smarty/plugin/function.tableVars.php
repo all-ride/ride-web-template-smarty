@@ -3,6 +3,7 @@
 use pallo\library\html\table\FormTable;
 
 function smarty_function_tableVars($params, &$smarty) {
+    $smarty->assign('tableNameField', FormTable::FIELD_NAME);
     $smarty->assign('tableActionField', FormTable::FIELD_ACTION);
     $smarty->assign('tableIdField', FormTable::FIELD_ID);
     $smarty->assign('tableOrderField', FormTable::FIELD_ORDER_METHOD);
