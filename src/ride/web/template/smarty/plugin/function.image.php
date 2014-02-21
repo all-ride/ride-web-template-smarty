@@ -1,6 +1,6 @@
 <?php
 
-use pallo\library\String;
+use ride\library\String;
 
 function smarty_function_image($params, &$smarty) {
     try {
@@ -51,7 +51,7 @@ function smarty_function_image($params, &$smarty) {
                 return '<span style="color: red;">Could not load image ' . $src . ': system is not available in the app variable.</span>';
             }
 
-            $imageUrlGenerator = $app['system']->getDependencyInjector()->get('pallo\\library\\image\\ImageUrlGenerator');
+            $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
             $src = $imageUrlGenerator->generateUrl((string) $src, $thumbnailer, $width, $height);
 
             $params['src'] = $src;
@@ -76,7 +76,7 @@ function smarty_function_image($params, &$smarty) {
     } catch (Exception $exception) {
         $app = $smarty->getTemplateVars('app');
         if (isset($app['system'])) {
-            $log = $app['system']->getDependencyInjector()->get('pallo\\library\\log\\Log');
+            $log = $app['system']->getDependencyInjector()->get('ride\\library\\log\\Log');
             $log->logException($exception);
         }
 

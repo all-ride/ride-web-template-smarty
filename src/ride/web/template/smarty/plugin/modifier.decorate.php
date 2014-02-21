@@ -10,7 +10,7 @@ function smarty_modifier_decorate($value, $type = null) {
     if (!isset($decorators[$type])) {
         global $system;
 
-        $decorators[$type] = $system->getDependencyInjector()->get('pallo\\library\\decorator\\Decorator', $type);
+        $decorators[$type] = $system->getDependencyInjector()->get('ride\\library\\decorator\\Decorator', $type);
     }
 
     return $decorators[$type]->decorate($value);

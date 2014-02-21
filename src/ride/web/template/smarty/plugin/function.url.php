@@ -25,7 +25,7 @@ function smarty_function_url($params, &$smarty) {
         return '<span style="color: red;">Could not get URL for ' . $id . ': system is not available in the app variable.</span>';
     }
 
-    $router = $app['system']->getDependencyInjector()->get('pallo\\library\\router\\Router');
+    $router = $app['system']->getDependencyInjector()->get('ride\\library\\router\\Router');
     $url = $router->getRouteContainer()->getUrl($app['url']['script'], $id, $parameters);
 
     if ($var == null) {

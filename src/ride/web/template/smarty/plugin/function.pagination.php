@@ -1,6 +1,6 @@
 <?php
 
-use pallo\library\html\Pagination;
+use ride\library\html\Pagination;
 
 function smarty_function_pagination($params, &$smarty) {
     $page = 0;
