@@ -14,7 +14,7 @@ function smarty_block_isGranted($params, $content, &$smarty, &$repeat) {
         trigger_error('System is not set in the app variable.');
     }
 
-    $securityManager = $app['system']->getDependencyInjector()->get('pallo\\library\\security\\SecurityManager');
+    $securityManager = $app['system']->getDependencyInjector()->get('ride\\library\\security\\SecurityManager');
 
     if (isset($params['route'])) {
         if ($securityManager->isPathAllowed($params['route'])) {

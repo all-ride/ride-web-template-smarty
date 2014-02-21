@@ -20,7 +20,7 @@ function smarty_function_translate($params, &$smarty) {
             return '<span style="color: red;">Could not translate ' . $key . ': system is not available in the app variable.</span>';
         }
 
-        $i18n = $app['system']->getDependencyInjector()->get('pallo\\library\\i18n\\I18n');
+        $i18n = $app['system']->getDependencyInjector()->get('ride\\library\\i18n\\I18n');
         $translator = $i18n->getTranslator();
 
         $smarty->assign('translator', $translator);

@@ -6,7 +6,7 @@ function smarty_modifier_translate($string, array $parameters = null) {
     if (!$translator) {
         global $system;
 
-        $i18n = $system->getDependencyInjector()->get('pallo\\library\\i18n\\I18n');
+        $i18n = $system->getDependencyInjector()->get('ride\\library\\i18n\\I18n');
         $translator = $i18n->getTranslator();
     }
 
