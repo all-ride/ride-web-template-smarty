@@ -7,24 +7,25 @@ function smarty_function_translate($params, &$smarty) {
     $key = $params['key'];
     unset($params['key']);
 
+    $locale = null;
+    if (!empty($params['locale'])) {
+        $locale = $params['locale'];
+        unset($params['locale']);
+    }
+
     $var = null;
     if (!empty($params['var'])) {
         $var = $params['var'];
         unset($params['var']);
     }
 
-    $translator = $smarty->getTemplateVars('translator');
-    if (!$translator) {
-        $app = $smarty->getTemplateVars('app');
-        if (!isset($app['system'])) {
-            return '<span style="color: red;">Could not translate ' . $key . ': system is not available in the app variable.</span>';
-        }
-
-        $i18n = $app['system']->getDependencyInjector()->get('ride\\library\\i18n\\I18n');
-        $translator = $i18n->getTranslator();
-
-        $smarty->assign('translator', $translator);
+    $app = $smarty->getTemplateVars('app');
+    if (!isset($app['system'])) {
+        return '<span style="color: red;">Could not translate ' . $key . ': system is not available in the app variable.</span>';
     }
+
+    $i18n = $app['system']->getDependencyInjector()->get('ride\\library\\i18n\\I18n');
+    $translator = $i18n->getTranslator($locale);
 
     $translation = $translator->translate($key, $params);
 
