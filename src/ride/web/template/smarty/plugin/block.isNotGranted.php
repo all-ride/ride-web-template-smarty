@@ -14,7 +14,7 @@ function smarty_block_isNotGranted($params, $content, &$smarty, &$repeat) {
         trigger_error('System is not set in the app variable.');
     }
 
-    $securityManager = $app['zibo']->getDependency('zibo\\library\\security\\SecurityManager');
+    $securityManager = $app['zibo']->getDependency('ride\\library\\security\\SecurityManager');
 
     if (isset($params['route'])) {
         if (!$securityManager->isPathAllowed($params['route'])) {
