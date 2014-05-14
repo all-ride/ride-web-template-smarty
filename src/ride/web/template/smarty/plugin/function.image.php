@@ -44,17 +44,15 @@ function smarty_function_image($params, &$smarty) {
             unset($params['thumbnail']);
         }
 
-        if (!StringHelper::startsWith($src, array('http://', 'https://'))) {
-            $app = $smarty->getTemplateVars('app');
-            if (!isset($app['system'])) {
-                return '<span style="color: red;">Could not load image ' . $src . ': system is not available in the app variable.</span>';
-            }
-
-            $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
-            $src = $imageUrlGenerator->generateUrl($src, $thumbnailer, $width, $height);
-
-            $params['src'] = $src;
+        $app = $smarty->getTemplateVars('app');
+        if (!isset($app['system'])) {
+            return '<span style="color: red;">Could not load image ' . $src . ': system is not available in the app variable.</span>';
         }
+
+        $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
+        $src = $imageUrlGenerator->generateUrl($src, $thumbnailer, $width, $height);
+
+        $params['src'] = $src;
 
         if (isset($params['var'])) {
             $smarty->assign($params['var'], $src);
