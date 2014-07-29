@@ -3,45 +3,34 @@
 use ride\library\StringHelper;
 
 function smarty_function_image($params, &$smarty) {
+    $src = null;
+
     try {
         if (empty($params['src']) && empty($params['default'])) {
             throw new Exception('No src parameter provided for the image');
         }
 
-        if (isset($params['src'])) {
-            $src = $params['src'];
-        } else {
+        $transformation = null;
+        $var = null;
+
+        if (isset($params['default'])) {
             $src = $params['default'];
             unset($params['default']);
         }
-
-        $thumbnailer = null;
-        $width = 0;
-        $height = 0;
-        $html = null;
-
-        $params['src'] = $src;
-        if (!empty($params['thumbnail'])) {
-            if (!isset($params['width'])) {
-                $width = 0;
-            } elseif (empty($params['width'])) {
-                throw new Exception('Invalid width parameter provided for the thumbnailer');
-            } else {
-                $width = $params['width'];
-                unset($params['width']);
-            }
-
-            if (!isset($params['height'])) {
-                $height = 0;
-            } elseif (empty($params['height'])) {
-                throw new Exception('Invalid height parameter provided for the thumbnailer sqljfqmlskdjf');
-            } else {
-                $height = $params['height'];
-                unset($params['height']);
-            }
-
-            $thumbnailer = $params['thumbnail'];
+        if (isset($params['src'])) {
+            $src = $params['src'];
+            unset($params['src']);
+        }
+        if (isset($params['var'])) {
+            $var = $params['var'];
+            unset($params['var']);
+        }
+        if (isset($params['thumbnail'])) {
+            $transformation = $params['thumbnail'];
             unset($params['thumbnail']);
+        } elseif (isset($params['transformation'])) {
+            $transformation = $params['transformation'];
+            unset($params['transformation']);
         }
 
         $app = $smarty->getTemplateVars('app');
@@ -50,26 +39,15 @@ function smarty_function_image($params, &$smarty) {
         }
 
         $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
-        $src = $imageUrlGenerator->generateUrl($src, $thumbnailer, $width, $height);
+        $src = $imageUrlGenerator->generateUrl($src, $transformation, $params);
 
-        $params['src'] = $src;
-
-        if (isset($params['var'])) {
+        if ($var) {
             $smarty->assign($params['var'], $src);
 
             return;
         }
 
-        $html = '<img';
-        foreach ($params as $key => $value) {
-            if ($value == '') {
-                continue;
-            }
-
-            $html .= ' ' . $key . '="' . $value . '"';
-        }
-
-        $html .=  ' />';
+        return $src;
     } catch (Exception $exception) {
         $app = $smarty->getTemplateVars('app');
         if (isset($app['system'])) {
@@ -79,10 +57,10 @@ function smarty_function_image($params, &$smarty) {
 
         if (isset($params['var'])) {
             $smarty->assign($params['var'], $src);
-        } else {
-            $html = '<span style="color: red;">Could not load image: ' . $src . '</span>';
         }
+
+        $src = null;
     }
 
-    return $html;
+    return $src;
 }
