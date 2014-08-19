@@ -12,9 +12,11 @@ function smarty_function_image($params, &$smarty) {
 
         $transformation = null;
         $var = null;
+        $default = null;
 
         if (isset($params['default'])) {
-            $src = $params['default'];
+            $default = $params['default'];
+            $src = $default;
             unset($params['default']);
         }
         if (isset($params['src'])) {
@@ -39,7 +41,13 @@ function smarty_function_image($params, &$smarty) {
         }
 
         $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
-        $src = $imageUrlGenerator->generateUrl($src, $transformation, $params);
+        try {
+            $src = $imageUrlGenerator->generateUrl($src, $transformation, $params);
+        } catch (Exception $exception) {
+            if ($src != $default && $default) {
+                $src = $imageUrlGenerator->generateUrl($default, $transformation, $params);
+            }
+        }
 
         if ($var) {
             $smarty->assign($params['var'], $src);
@@ -55,11 +63,11 @@ function smarty_function_image($params, &$smarty) {
             $log->logException($exception);
         }
 
+        $src = null;
+
         if (isset($params['var'])) {
             $smarty->assign($params['var'], $src);
         }
-
-        $src = null;
     }
 
     return $src;
