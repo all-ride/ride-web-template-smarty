@@ -50,7 +50,7 @@ function smarty_function_image($params, &$smarty) {
         }
 
         if ($var) {
-            $smarty->assign($params['var'], $src);
+            $smarty->assign($var, $src);
 
             return;
         }
