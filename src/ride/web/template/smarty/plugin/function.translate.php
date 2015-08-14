@@ -13,6 +13,12 @@ function smarty_function_translate($params, &$smarty) {
         unset($params['locale']);
     }
 
+    $n = null;
+    if (!empty($params['n'])) {
+        $n = $params['n'];
+        unset($params['n']);
+    }
+
     $var = null;
     if (!empty($params['var'])) {
         $var = $params['var'];
@@ -27,7 +33,11 @@ function smarty_function_translate($params, &$smarty) {
     $i18n = $app['system']->getDependencyInjector()->get('ride\\library\\i18n\\I18n');
     $translator = $i18n->getTranslator($locale);
 
-    $translation = $translator->translate($key, $params);
+    if ($n !== null) {
+        $translation = $translator->translatePlural($n, $key, $params);
+    } else {
+        $translation = $translator->translate($key, $params);
+    }
 
     if ($var == null) {
         return $translation;
