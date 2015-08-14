@@ -14,7 +14,7 @@ function smarty_function_translate($params, &$smarty) {
     }
 
     $n = null;
-    if (!empty($params['n'])) {
+    if (isset($params['n'])) {
         $n = $params['n'];
         unset($params['n']);
     }
