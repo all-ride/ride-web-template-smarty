@@ -46,6 +46,8 @@ function smarty_function_image($params, &$smarty) {
         } catch (Exception $exception) {
             if ($src != $default && $default) {
                 $src = $imageUrlGenerator->generateUrl($default, $transformation, $params);
+            } else {
+                throw $exception;
             }
         }
 
