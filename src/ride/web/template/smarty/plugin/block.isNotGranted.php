@@ -6,7 +6,7 @@ function smarty_block_isNotGranted($params, $content, &$smarty, &$repeat) {
     }
 
     if (!isset($params['route']) && !isset($params['url']) && !isset($params['permission'])) {
-        throw new Exception('No route or permission provided');
+        throw new Exception('No route, URL or permission provided');
     }
 
     $app = $smarty->getTemplateVars('app');
@@ -14,7 +14,7 @@ function smarty_block_isNotGranted($params, $content, &$smarty, &$repeat) {
         trigger_error('System is not set in the app variable.');
     }
 
-    $securityManager = $app['zibo']->getDependency('ride\\library\\security\\SecurityManager');
+    $securityManager = $app['system']->getDependencyInjector()->get('ride\\library\\security\\SecurityManager');
 
     if (isset($params['route'])) {
         if (!$securityManager->isPathAllowed($params['route'])) {
