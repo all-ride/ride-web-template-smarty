@@ -16,17 +16,26 @@ function smarty_block_isGranted($params, $content, &$smarty, &$repeat) {
 
     $securityManager = $app['system']->getDependencyInjector()->get('ride\\library\\security\\SecurityManager');
 
-    if (isset($params['route'])) {
-        if ($securityManager->isPathAllowed($params['route'])) {
-            return $content;
-        }
-    } elseif (isset($params['url'])) {
-        if ($securityManager->isUrlAllowed($params['url'])) {
-            return $content;
-        }
-    } elseif ($securityManager->isPermissionGranted($params['permission'])) {
-        return $content;
+    $var = null;
+    if (!empty($params['var'])) {
+        $var = $params['var'];
+
+        $smarty->assign($var, false);
     }
 
-    return;
+    if (isset($params['route']) && !$securityManager->isPathAllowed($params['route'])) {
+        return;
+    }
+    if (isset($params['url']) && !$securityManager->isUrlAllowed($params['url'])) {
+        return;
+    }
+    if (isset($params['permission']) && !$securityManager->isPermissionGranted($params['permission'])) {
+        return;
+    }
+
+    if ($var) {
+        $smarty->assign($var, true);
+    }
+
+    return $content;
 }
