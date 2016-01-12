@@ -40,14 +40,26 @@ function smarty_function_image($params, &$smarty) {
             return '<span style="color: red;">Could not load image ' . $src . ': system is not available in the app variable.</span>';
         }
 
-        $imageUrlGenerator = $app['system']->getDependencyInjector()->get('ride\\library\\image\\ImageUrlGenerator');
+        $dependencyInjector = $app['system']->getDependencyInjector();
+        $imageUrlGenerator = $dependencyInjector->get('ride\\library\\image\\ImageUrlGenerator');
+
         try {
             $src = $imageUrlGenerator->generateUrl($src, $transformation, $params);
         } catch (Exception $exception) {
+            $log = $dependencyInjector->get('ride\\library\\log\\Log');
+
             if ($src != $default && $default) {
-                $src = $imageUrlGenerator->generateUrl($default, $transformation, $params);
+                try {
+                    $src = $imageUrlGenerator->generateUrl($default, $transformation, $params);
+                } catch (Exception $exception) {
+                    $log->logException($exception);
+
+                    $src = null;
+                }
             } else {
-                throw $exception;
+                $log->logException($exception);
+
+                $src = null;
             }
         }
 
