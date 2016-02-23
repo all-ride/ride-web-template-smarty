@@ -32,6 +32,12 @@ function smarty_function_url($params, &$smarty) {
         unset($params['var']);
     }
 
+    $needsObject = false;
+    if (!empty($params['object'])) {
+        $needsObject = $params['object'];
+        unset($params['object']);
+    }
+
     $app = $smarty->getTemplateVars('app');
     if (!isset($app['system'])) {
         return '<span style="color: red;">Could not get URL for ' . $id . ': system is not available in the app variable.</span>';
@@ -39,6 +45,10 @@ function smarty_function_url($params, &$smarty) {
 
     $router = $app['system']->getDependencyInjector()->get('ride\\library\\router\\Router');
     $url = $router->getRouteContainer()->getUrl($app['url']['script'], $id, $parameters, $queryParameters, $querySeparator);
+
+    if (!$needsObject) {
+        $url = (string) $url;
+    }
 
     if ($var == null) {
         return $url;
