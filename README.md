@@ -59,15 +59,19 @@ To see more transformations and their parameters, check out [ride-lib-image](htt
 Render pagination links.
 
 | Parameter | Type | Description |
-| label |  |  |
-| label |  |  |
-| label |  |  |
-| label |  |  |
-| label |  |  |
+| --- | --- | --- |
+| label | String | ? |
+| page | Integer | Current page index. |
+| pages | Integer | Number of pages. |
+| href | String | Base URL for anchor tags. |
+| onclick | String | onClick attribute for anchor tags. |
+| class | String | Class attribute. |
 
 ```Smarty
-{pagination label= page= pages= href= onclick= class=}
+{pagination page=$pagination->getPage() pages=$pagination->getPages() href=$pagination->getHref()}
 ```
+
+:warning: The parameters for this function usually come from an existing `$pagination` variable in the template.
 
 ### tableVars
 
@@ -103,6 +107,13 @@ Translate a key using the i18n translator.
 
 ### url
 
+| Parameter | Type | Description |
+| --- | --- | --- |
+| id | | |
+| id | | |
+| id | | |
+| id | | |
+
 ```Smarty
 {url id= parameters= query= separator= var= object=}
 ```
@@ -124,7 +135,7 @@ Common decorator IDs: `storage.size` / `time` / `date.format` / `file` / `file.e
 ```
 
 ### safe
-Modify a string value to safely use as file name, URL, id etc.
+Modify a string value to safely use it as a file name, URL, id etc.
 
 ```Smarty
 {'Unsafe string!'|safe} {* result: unsafe-string *}
