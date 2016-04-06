@@ -6,15 +6,34 @@
 
 ### isGranted
 
+Parse block content if the specified route/url/permission is allowed.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| route | String | Path to check for allowance. |
+| url | URL to check for allowance. |
+| permission | Permission to check for allowance. |
+| var | String | Variable to assign the result to. (`true` if this block content will be parsed, `false` otherwise) |
+
 ```Smarty
-{isGranted route= url= permission= var=}
+{isGranted permission="cms.node.varnish.manage"}
+  ...
 {/isGranted}
 ```
 
 ### isNotGranted
 
+Parse block content if the specified route/url/permission is *not* allowed.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| route | String | Path to check for allowance. |
+| url | URL to check for allowance. |
+| permission | Permission to check for allowance. |
+
 ```Smarty
-{isNotGranted route= url= permission= var=}
+{isNotGranted permission="cms.node.varnish.manage"}
+  ...
 {/isNotGranted}
 ```
 
