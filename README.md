@@ -56,11 +56,29 @@ To see more transformations and their parameters, check out [ride-lib-image](htt
 
 ### pagination
 
+Render pagination links.
+
+| Parameter | Type | Description |
+| label |  |  |
+| label |  |  |
+| label |  |  |
+| label |  |  |
+| label |  |  |
+
 ```Smarty
 {pagination label= page= pages= href= onclick= class=}
 ```
 
 ### tableVars
+
+Add these FormTable variables to the template:
+
+- `$tableNameField`
+- `$tableActionField`
+- `$tableIdField`
+- `$tableOrderField`
+- `$tableSearchQueryField`
+- `$tablePageRowsField`
 
 ```Smarty
 {tableVars}
@@ -68,9 +86,20 @@ To see more transformations and their parameters, check out [ride-lib-image](htt
 
 ### translate
 
+Translate a key using the i18n translator.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| key | String | Translation key. |
+| locale | String | Translation locale. |
+| n | Integer | Number of items for a translation that describes multiple items. |
+| var | String | Variable name to assign the translated key to. |
+
 ```Smarty
-{translate key= locale= n= var=}
+{translate key='label.submit' locale='nl'}
 ```
+
+:warning: When simply translating a key, using the `{$key|translate}` modifier syntax is preferred.
 
 ### url
 
