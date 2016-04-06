@@ -11,8 +11,8 @@ Parse block content if the specified route/url/permission is allowed.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | route | String | Path to check for allowance. |
-| url | URL to check for allowance. |
-| permission | Permission to check for allowance. |
+| url | String | URL to check for allowance.
+| permission | String | Permission code to check for allowance. |
 | var | String | Variable to assign the result to. (`true` if this block content will be parsed, `false` otherwise) |
 
 ```Smarty
@@ -28,8 +28,8 @@ Parse block content if the specified route/url/permission is *not* allowed.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | route | String | Path to check for allowance. |
-| url | URL to check for allowance. |
-| permission | Permission to check for allowance. |
+| url | String | URL to check for allowance. |
+| permission | String | Permission code to check for allowance. |
 
 ```Smarty
 {isNotGranted permission="cms.node.varnish.manage"}
