@@ -107,15 +107,19 @@ Translate a key using the i18n translator.
 
 ### url
 
+Create an URL.
+
 | Parameter | Type | Description |
 | --- | --- | --- |
-| id | | |
-| id | | |
-| id | | |
-| id | | |
+| id | String | Route ID. |
+| parameters | Array | Path arguments for the URL. |
+| query | Array | Query parameters. |
+| separator | String | Seperator for query parameters. (defaults to `&`) |
+| var | String | Variable name to assign the URL to. |
+| object | Boolean | Return URL Object instead of String. (defaults to `false`) |
 
 ```Smarty
-{url id= parameters= query= separator= var= object=}
+{url id='api.search' var='searchUrl'}
 ```
 
 ## Modifiers
