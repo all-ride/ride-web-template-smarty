@@ -73,25 +73,6 @@ To see more transformations and their parameters, check out [ride-lib-image](htt
 {image src=$content->image var='image' transformation='crop'}
 ```
 
-### pagination
-
-Render pagination links.
-
-| Parameter | Type | Description |
-| --- | --- | --- |
-| label | String | ? |
-| page | Integer | Current page index. |
-| pages | Integer | Number of pages. |
-| href | String | Base URL for anchor tags. |
-| onclick | String | onClick attribute for anchor tags. |
-| class | String | Class attribute. |
-
-```Smarty
-{pagination page=$pagination->getPage() pages=$pagination->getPages() href=$pagination->getHref()}
-```
-
-:warning: The parameters for this function usually come from an existing `$pagination` variable in the template.
-
 ### tableVars
 
 Add these FormTable variables to the template:
@@ -155,6 +136,18 @@ Common decorator IDs: `storage.size` / `time` / `date.format` / `file` / `file.e
 
 ```Smarty
 {$content->data->getDatePublished()|decorate:'time'}
+```
+
+### parsley
+Add the parsley data attributes to the attributes of a form widget.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+|  | Array | Validators of a form row |
+
+
+```Smarty
+{$attributes = $formRow->getWidget()->getAttributes()|parsley:$row->getValidators()}
 ```
 
 ### safe
