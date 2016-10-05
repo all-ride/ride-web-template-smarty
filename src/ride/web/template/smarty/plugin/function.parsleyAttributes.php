@@ -40,6 +40,10 @@ function smarty_function_parsleyAttributes($params, &$smarty) {
                 $attributes['data-parsley-type'] = 'email';
 
                 break;
+            case 'ride\\library\\validation\\validator\\RequiredValidator':
+                $attributes['data-parsley-required'] = 'true';
+
+                break;
             case 'ride\\library\\validation\\validator\\MinMaxValidator':
                 if (isset($options['minimum']) && isset($options['maximum'])) {
                     $attributes['data-parsley-range'] = '[' . $options['minimum'] . ', ' . $options['maximum'] . ']';
