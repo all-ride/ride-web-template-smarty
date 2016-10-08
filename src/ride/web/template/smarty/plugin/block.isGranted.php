@@ -5,8 +5,29 @@ function smarty_block_isGranted($params, $content, &$smarty, &$repeat) {
         return;
     }
 
+    $isGranted = smarty_block_isGranted_test($params, $smarty);
+
+    if (!empty($params['var'])) {
+        $var = $params['var'];
+
+        $smarty->assign($var, $isGranted);
+    }
+
+    if (!$isGranted) {
+        return;
+    }
+
+    return $content;
+}
+
+function smarty_block_isGranted_test($params, &$smarty) {
     if (!isset($params['route']) && !isset($params['url']) && !isset($params['permission'])) {
         throw new Exception('No route, URL or permission provided');
+    }
+
+    $strategy = 'OR';
+    if (isset($params['strategy'])) {
+        $strategy = strtoupper($params['strategy']);
     }
 
     $app = $smarty->getTemplateVars('app');
@@ -16,26 +37,31 @@ function smarty_block_isGranted($params, $content, &$smarty, &$repeat) {
 
     $securityManager = $app['system']->getDependencyInjector()->get('ride\\library\\security\\SecurityManager');
 
-    $var = null;
-    if (!empty($params['var'])) {
-        $var = $params['var'];
-
-        $smarty->assign($var, false);
+    if ($strategy == 'AND') {
+        $isRouteAllowed = true;
+        $isUrlAllowed = true;
+        $isPermissionGranted = true;
+    } else {
+        $isRouteAllowed = false;
+        $isUrlAllowed = false;
+        $isPermissionGranted = false;
     }
 
-    if (isset($params['route']) && !$securityManager->isPathAllowed($params['route'])) {
-        return;
+    if (isset($params['route'])) {
+        $isRouteAllowed = $securityManager->isPathAllowed($params['route']);
     }
-    if (isset($params['url']) && !$securityManager->isUrlAllowed($params['url'])) {
-        return;
+    if (isset($params['url'])) {
+        $isUrlAllowed = $securityManager->isUrlAllowed($params['url']);
     }
-    if (isset($params['permission']) && !$securityManager->isPermissionGranted($params['permission'])) {
-        return;
-    }
-
-    if ($var) {
-        $smarty->assign($var, true);
+    if (isset($params['permission'])) {
+        $isPermissionGranted = $securityManager->isPermissionGranted($params['permission']);
     }
 
-    return $content;
+    if ($strategy == 'AND') {
+        $isGranted = $isRouteAllowed && $isUrlAllowed && $isPermissionGranted;
+    } else {
+        $isGranted = $isRouteAllowed || $isUrlAllowed || $isPermissionGranted;
+    }
+
+    return $isGranted;
 }

@@ -13,13 +13,16 @@ Parse block content if the specified route/url/permission is allowed.
 | route | String | Path to check for allowance. |
 | url | String | URL to check for allowance.
 | permission | String | Permission code to check for allowance. |
-| var | String | Variable to assign the result to. (`true` if this block content will be parsed, `false` otherwise) |
+| strategy | String | AND or OR when checking more then one of the above checks. |
+| var | String | Variable to assign the result to. (`true` if this block content will be printed, `false` otherwise) |
 
 ```Smarty
 {isGranted permission="cms.node.varnish.manage"}
   ...
 {/isGranted}
 ```
+
+_Note: The content of this block is always rendered. If the content is used for logic, assign the grant to a var and use an if statement._
 
 ### isNotGranted
 
@@ -30,12 +33,16 @@ Parse block content if the specified route/url/permission is *not* allowed.
 | route | String | Path to check for allowance. |
 | url | String | URL to check for allowance. |
 | permission | String | Permission code to check for allowance. |
+| strategy | String | AND or OR when checking more then one of the above checks. |
+| var | String | Variable to assign the result to. (`true` if this block content will be printed, `false` otherwise) |
 
 ```Smarty
 {isNotGranted permission="cms.node.varnish.manage"}
   ...
 {/isNotGranted}
 ```
+
+_Note: The content of this block is always rendered. If the content is used for logic, assign the grant to a var and use an if statement._
 
 ## Template functions
 
