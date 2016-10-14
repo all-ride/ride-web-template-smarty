@@ -1,4 +1,6 @@
-# ride-web-template-smarty
+# Ride: Template (Smarty)
+
+This module adds template blocks, functions and modifiers for a Ride application to Smarty.
 
 ## Block functions
 
@@ -80,6 +82,21 @@ To see more transformations and their parameters, check out [ride-lib-image](htt
 {image src=$content->image var='image' transformation='crop'}
 ```
 
+### parsley
+
+Adds parsley data attributes to the attributes of a form widget.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| type | string | Type of the form row widget |
+| validators | Array | Validators of a form row |
+| var | String | Variable name to assign the updated attributes to. |
+
+```Smarty
+{$widget = $formRow->getWidget()}
+{parsleyAttributes attributes=$widget->getAttributes() type=$widget->getType() var="attributes"}
+```
+
 ### tableVars
 
 Add these FormTable variables to the template:
@@ -145,18 +162,6 @@ Common decorator IDs: `storage.size` / `time` / `date.format` / `file` / `file.e
 {$content->data->getDatePublished()|decorate:'time'}
 ```
 
-### parsley
-Add the parsley data attributes to the attributes of a form widget.
-
-| Parameter | Type | Description |
-| --- | --- | --- |
-|  | Array | Validators of a form row |
-
-
-```Smarty
-{$attributes = $formRow->getWidget()->getAttributes()|parsley:$row->getValidators()}
-```
-
 ### safe
 Modify a string value to safely use it as a file name, URL, id etc.
 
@@ -172,4 +177,30 @@ Modify a string value to safely use it as a file name, URL, id etc.
 
 ```Smarty
 {'label.fields.required'|translate}
+```
+
+## Related Modules 
+
+- [ride/app](https://github.com/all-ride/ride-app)
+- [ride/app-image](https://github.com/all-ride/ride-app-template)
+- [ride/app-template](https://github.com/all-ride/ride-app-template)
+- [ride/app-template-smarty](https://github.com/all-ride/ride-app-template-smarty)
+- [ride/lib-api](https://github.com/all-ride/ride-lib-api)
+- [ride/lib-image](https://github.com/all-ride/ride-lib-i18n)
+- [ride/lib-i18n](https://github.com/all-ride/ride-lib-i18n)
+- [ride/lib-router](https://github.com/all-ride/ride-lib-router)
+- [ride/lib-security](https://github.com/all-ride/ride-lib-security)
+- [ride/lib-template](https://github.com/all-ride/ride-lib-template)
+- [ride/lib-template-smarty](https://github.com/all-ride/ride-lib-template-smarty)
+- [ride/web](https://github.com/all-ride/ride-web)
+- [ride/web-api](https://github.com/all-ride/ride-web-api)
+- [ride/web-security](https://github.com/all-ride/ride-web-security)
+- [ride/web-template](https://github.com/all-ride/ride-web-template)
+
+## Installation
+
+You can use [Composer](http://getcomposer.org) to install this application.
+
+```
+composer require ride/web-template-smarty
 ```
