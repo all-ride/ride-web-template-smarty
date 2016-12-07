@@ -70,13 +70,13 @@ Return the URL of a transformed image.
 | --- | --- | --- |
 | src | String | Source url or file for this image. |
 | default | String | Fallback for src parameter. |
-| var | String | Variable name to assign this URL to. |
-| thumbnail | --- | --- |
 | transformation | String | Name of the transformation. |
+| var | String | Variable name to assign this URL to. |
+| thumbnail | --- | Deprecated |
 
 :warning: Transformations may require additional parameters.
 
-To see more transformations and their parameters, check out [ride-lib-image](https://github.com/all-ride/ride-lib-image/tree/master/src/ride/library/image/transformation).
+For more information about the transformations and their parameters, check out [ride-lib-image](https://github.com/all-ride/ride-lib-image#transformation).
 
 ```Smarty
 {image src=$content->image var='image' transformation='crop'}
