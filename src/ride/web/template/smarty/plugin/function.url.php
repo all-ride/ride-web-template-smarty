@@ -43,8 +43,18 @@ function smarty_function_url($params, &$smarty) {
         return '<span style="color: red;">Could not get URL for ' . $id . ': system is not available in the app variable.</span>';
     }
 
-    $router = $app['system']->getDependencyInjector()->get('ride\\library\\router\\Router');
-    $url = $router->getRouteContainer()->getUrl($app['url']['script'], $id, $parameters, $queryParameters, $querySeparator);
+    $dependencyInjector = $app['system']->getDependencyInjector();
+
+    $router = $dependencyInjector->get('ride\\library\\router\\Router');
+
+    try {
+        $url = $router->getRouteContainer()->getUrl($app['url']['script'], $id, $parameters, $queryParameters, $querySeparator);
+    } catch (Exception $exception) {
+        $log = $dependencyInjector->get('ride\\library\\log\\Log');
+        $log->logException($exception);
+
+        $url = null;
+    }
 
     if (!$needsObject) {
         $url = (string) $url;
