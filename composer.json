@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "nesbot/carbon": "^2.0",
         "ride/app": "^1.0.0",
         "ride/app-template": "^1.0.0",
         "ride/app-template-smarty": "^1.0.0",
