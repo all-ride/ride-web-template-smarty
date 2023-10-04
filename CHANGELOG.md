@@ -1,3 +1,7 @@
+# [1.2.2]
+## Added
+- Added is_array and in_array as modifier
+
 # [1.2.1]
 ## Updated
 - Fixed date_formatted default format 
