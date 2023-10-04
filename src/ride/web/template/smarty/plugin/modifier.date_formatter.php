@@ -28,7 +28,7 @@
  */
 function smarty_modifier_date_formatter($string, $format = null) {
     if ($format === null) {
-        $format = 'd/m/Y';
+        $format = 'D/M/Y';
     }
     if (empty($string)) {
         $string = time();
