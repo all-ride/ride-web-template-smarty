@@ -1,3 +1,6 @@
+# [1.2.1]
+## Updated
+- Fixed date_formatted default format 
 #[1.2.0]
 ## Added
 - Added smarty modifiers that are removed in v4
