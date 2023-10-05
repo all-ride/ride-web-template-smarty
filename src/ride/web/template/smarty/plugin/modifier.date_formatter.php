@@ -35,7 +35,8 @@ function smarty_modifier_date_formatter($string, $format = null) {
     }
 
     try {
-        $dateCarbon = new \Carbon\Carbon($string);
+        $dateCarbon = new \Carbon\Carbon();
+        $dateCarbon->setTimestamp($string);
         return $dateCarbon->locale(Locale::getDefault())->isoFormat($format);
 
     } catch (\Exception $e) {

@@ -1,3 +1,6 @@
+# [1.2.3]
+## Updated
+- Fixed Nesbot carbon date format
 # [1.2.2]
 ## Added
 - Added is_array and in_array as modifier
