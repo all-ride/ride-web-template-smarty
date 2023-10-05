@@ -1,3 +1,6 @@
+#[1.2.4]
+### Updated
+- Formatting default date..
 # [1.2.3]
 ## Updated
 - Fixed Nesbot carbon date format
