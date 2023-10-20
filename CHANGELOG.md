@@ -1,3 +1,6 @@
+#[1.2.5]
+### Updated
+- When date format value is empty return null instead of now
 #[1.2.4]
 ### Updated
 - Formatting default date..

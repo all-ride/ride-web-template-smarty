@@ -27,11 +27,13 @@
  * @uses   smarty_make_timestamp()
  */
 function smarty_modifier_date_formatter($string, $format = null) {
+    
+    if (empty($string)) {
+        return null;
+    }
+
     if ($format === null) {
         $format = 'DD/MM/Y';
-    }
-    if (empty($string)) {
-        $string = time();
     }
 
     try {
