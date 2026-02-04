@@ -1,3 +1,9 @@
+#[2.1.0]
+### Updated
+- Added Carbon 3 compatibility
+#[2.0.0]
+### Updated
+- Updated smarty
 #[1.2.5]
 ### Updated
 - When date format value is empty return null instead of now
