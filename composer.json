@@ -12,7 +12,7 @@
         "nesbot/carbon": "^2.0|^3.0",
         "ride/app": "^1.0.0",
         "ride/app-template": "^1.0.0",
-        "ride/app-template-smarty": "^1.0.0",
+        "ride/app-template-smarty": "^2.0.0",
         "ride/lib-common": "^1.0.0",
         "ride/lib-html": "^1.0.0",
         "ride/web": "^1.0.0",
